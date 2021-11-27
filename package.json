@@ -14,11 +14,9 @@
     "@types/cors": "latest",
     "@types/express": "latest",
     "@types/node": "latest",
-    "@types/node-dht-sensor": "latest",
     "body-parser": "latest",
     "cors": "latest",
     "express": "latest",
-    "node-dht-sensor": "latest",
     "node-tradfri-client": "latest",
     "typescript": "latest"
   }
