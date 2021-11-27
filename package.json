@@ -1,0 +1,25 @@
+{
+  "name": "home-dashboard-local-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/Server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "cd dist && node Server.js"
+  },
+  "type": "module",
+  "author": "t0rbn",
+  "license": "MIT",
+  "dependencies": {
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/node-dht-sensor": "latest",
+    "body-parser": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "node-dht-sensor": "latest",
+    "node-tradfri-client": "latest",
+    "typescript": "latest"
+  }
+}

@@ -1,0 +1,12 @@
+[Unit]
+Description=home dashboard
+
+[Service]
+WorkingDirectory=usr/bin/node /home/pi/tradfri-express/dist
+ExecStart=/usr/bin/node /home/pi/tradfri-express/dist/Server.js
+Type=simple
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
