@@ -32,7 +32,7 @@ function start() {
         }
     })
 
-    app.get(config.server.apiBaseUrl, async (_req: Request, _res: Response) => {
+    app.get('/', async (_req: Request, _res: Response) => {
         _res.send(app._router.stack.map((layer: any) => layer.route?.path).filter(Boolean))
     })
 
