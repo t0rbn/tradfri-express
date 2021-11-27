@@ -10,11 +10,6 @@ import AdminService from './AdminService.js';
 import ServiceSingletonContainer from './util/ServiceSingletonContainer.js';
 import {Service} from './Service';
 
-export function generateEndpointUrl(endpoint: string) {
-    // @ts-ignore
-    return config.server.apiBaseUrl + endpoint
-}
-
 function start() {
     const logger = new Logger('server')
     logger.log('starting up')

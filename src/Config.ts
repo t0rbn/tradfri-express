@@ -1,7 +1,6 @@
 export default {
     'server': {
-        'port': 8000,
-        'apiBaseUrl': '/'
+        'port': 8000
     },
     'tradfri': {
         'apiEndpoint': '/tradfri',

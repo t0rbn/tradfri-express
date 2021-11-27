@@ -5,7 +5,6 @@ import Logger from './util/Logger.js'
 import IPSODeviceUsageSorter from './util/IPSODeviceUsageSorter.js';
 import {Service} from './Service'
 import {Application, Request, Response} from 'express'
-import {generateEndpointUrl} from './Server.js';
 
 export type LightResponse = {
     name: string
@@ -125,11 +124,11 @@ export default class LightsService implements Service {
     }
 
     registerEndpoints(app: Application): void {
-        app.get(`${generateEndpointUrl(config.tradfri.apiEndpoint)}/groups`, async (_req: Request, res: Response) => {
+        app.get(`${config.tradfri.apiEndpoint}/groups`, async (_req: Request, res: Response) => {
             res.send(this.getGroups())
         })
 
-        app.post(`${generateEndpointUrl(config.tradfri.apiEndpoint)}/lights/:id/brightness`, async (req: Request, res: Response) => {
+        app.post(`${config.tradfri.apiEndpoint}/lights/:id/brightness`, async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
                 const instanceId = Number.parseInt(id as string, 10)
@@ -140,7 +139,7 @@ export default class LightsService implements Service {
             }
         })
 
-        app.post(`${generateEndpointUrl(config.tradfri.apiEndpoint)}/lights/:id/temperature`, async (req: Request, res: Response) => {
+        app.post(`${config.tradfri.apiEndpoint}/lights/:id/temperature`, async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
                 const instanceId = Number.parseInt(id as string, 10)
@@ -151,7 +150,7 @@ export default class LightsService implements Service {
             }
         })
 
-        app.post(`${generateEndpointUrl(config.tradfri.apiEndpoint)}/lights/:id/color`, async (req: Request, res: Response) => {
+        app.post(`${config.tradfri.apiEndpoint}/lights/:id/color`, async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
                 const instanceId = Number.parseInt(id as string, 10)
@@ -163,11 +162,11 @@ export default class LightsService implements Service {
         })
 
 
-        app.get(`${generateEndpointUrl(config.tradfri.apiEndpoint)}/scenes`, async (_req: Request, res: Response) => {
+        app.get(`${config.tradfri.apiEndpoint}/scenes`, async (_req: Request, res: Response) => {
             res.send(this.getScenes())
         })
 
-        app.post(`${generateEndpointUrl(config.tradfri.apiEndpoint)}/scenes`, async (req: Request, res: Response) => {
+        app.post(`${config.tradfri.apiEndpoint}/scenes`, async (req: Request, res: Response) => {
             try {
                 const instanceId = Number.parseInt(req.body, 10)
                 await this.setScene(instanceId)
