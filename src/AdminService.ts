@@ -2,16 +2,15 @@ import {Service} from './Service'
 import {Application, Request, Response} from 'express';
 import LightsService from './LightsService.js';
 import ServiceSingletonContainer from './util/ServiceSingletonContainer.js';
-import config from './Config.js'
 
 export default class AdminService implements Service {
     registerEndpoints(app: Application): void {
-        app.get(config.admin.apiEndpoint + '/restartSystemD', async (_req: Request, _res: Response) => {
+        app.get('/admin/restartSystemD', async (_req: Request, _res: Response) => {
             this.rebootSystemD();
             _res.sendStatus(200)
         })
 
-        app.get(config.admin.apiEndpoint+ '/restartTradfriGateway', async (_req: Request, _res: Response) => {
+        app.get('/admin/restartTradfriGateway', async (_req: Request, _res: Response) => {
             await this.rebootTradfriGateway();
             _res.sendStatus(200)
         })

@@ -124,11 +124,11 @@ export default class LightsService implements Service {
     }
 
     registerEndpoints(app: Application): void {
-        app.get(`${config.tradfri.apiEndpoint}/groups`, async (_req: Request, res: Response) => {
+        app.get('/groups', async (_req: Request, res: Response) => {
             res.send(this.getGroups())
         })
 
-        app.post(`${config.tradfri.apiEndpoint}/lights/:id/brightness`, async (req: Request, res: Response) => {
+        app.post('/lights/:id/brightness', async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
                 const instanceId = Number.parseInt(id as string, 10)
@@ -139,7 +139,7 @@ export default class LightsService implements Service {
             }
         })
 
-        app.post(`${config.tradfri.apiEndpoint}/lights/:id/temperature`, async (req: Request, res: Response) => {
+        app.post('/lights/:id/temperature', async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
                 const instanceId = Number.parseInt(id as string, 10)
@@ -150,7 +150,7 @@ export default class LightsService implements Service {
             }
         })
 
-        app.post(`${config.tradfri.apiEndpoint}/lights/:id/color`, async (req: Request, res: Response) => {
+        app.post('/lights/:id/color', async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
                 const instanceId = Number.parseInt(id as string, 10)
@@ -162,11 +162,11 @@ export default class LightsService implements Service {
         })
 
 
-        app.get(`${config.tradfri.apiEndpoint}/scenes`, async (_req: Request, res: Response) => {
+        app.get('/scenes', async (_req: Request, res: Response) => {
             res.send(this.getScenes())
         })
 
-        app.post(`${config.tradfri.apiEndpoint}/scenes`, async (req: Request, res: Response) => {
+        app.post('/scenes', async (req: Request, res: Response) => {
             try {
                 const instanceId = Number.parseInt(req.body, 10)
                 await this.setScene(instanceId)
