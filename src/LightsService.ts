@@ -139,17 +139,6 @@ export default class LightsService implements Service {
             }
         })
 
-        app.post('/lights/:id/temperature', async (req: Request, res: Response) => {
-            try {
-                const {id} = req.params;
-                const instanceId = Number.parseInt(id as string, 10)
-                await this.setLightTemperature(instanceId, Number.parseFloat(req.body))
-                res.sendStatus(200)
-            } catch (e) {
-                res.sendStatus(500)
-            }
-        })
-
         app.post('/lights/:id/color', async (req: Request, res: Response) => {
             try {
                 const {id} = req.params;
@@ -203,27 +192,7 @@ export default class LightsService implements Service {
         }
 
         const newBrightness = Math.max(0, Math.min(100, Math.round(brightness * 100)))
-        await this.connection?.operateLight(light, {
-            dimmer: newBrightness,
-            onOff: newBrightness > 0
-        })
-    }
-
-    async setLightTemperature(lightId: number, temp: number): Promise<void> {
-        const light = this.lights.filter(light => light.instanceId === lightId)[0]
-        if (!light) {
-            this.logger.alert('cannot set temperature for unknown bulb')
-            throw 'unknown lightbulb'
-        }
-
-        const spectrum = light.lightList[0]?.spectrum
-        if (spectrum !== 'white') {
-            this.logger.alert('temperature not supported by spectrum')
-            throw 'temperature operation not supported'
-        }
-
-        const newTemp = Math.max(1, Math.min(100, Math.round(temp * 100)))
-        await this.connection?.operateLight(light, {colorTemperature: newTemp})
+        await light.lightList[0].setBrightness(newBrightness, 0)
     }
 
     async setLightColor(lightId: number, hexColor: string): Promise<void> {
@@ -234,11 +203,11 @@ export default class LightsService implements Service {
         }
 
         const spectrum = light.lightList[0]?.spectrum
-        if (spectrum !== 'rgb') {
+        if (spectrum === 'none') {
             this.logger.alert('color operation not supported by spectrum')
             throw 'color operation not supported'
         }
-        await this.connection?.operateLight(light, {color: hexColor.replace('#', '')})
+        await light.lightList[0].setColor(hexColor.replace('#', ''), 0)
     }
 
     getScenes(): Array<SceneResponse> {
